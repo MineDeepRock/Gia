@@ -1,0 +1,23 @@
+{
+    "name": "mine_deep_rock/gia",
+    "authors": [
+        {
+            "name": "suinua"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": [
+                "src/"
+            ]
+        }
+    },
+
+    "repositories": [
+
+    ],
+    "require": {
+        "pocketmine/pocketmine-mp": "*",
+        "ext-json": "*"
+    }
+}
