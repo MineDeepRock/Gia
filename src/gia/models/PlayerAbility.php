@@ -25,7 +25,6 @@ abstract class PlayerAbility
     }
 
 
-    //TODO:asReverseで判断
     public function up(int $value, bool $asReverse = false): void {
         if ($asReverse) {
             $this->reducedValue -= abs($value);
