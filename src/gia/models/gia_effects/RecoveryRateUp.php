@@ -1,13 +1,13 @@
 <?php
 
 
-namespace gia\data\gia_effects;
+namespace gia\models\gia_effects;
 
 
-use gia\data\GiaEffectUpAbility;
+use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\RecoveryRate;
 
-class RecoveryRateUp  extends GiaEffectUpAbility
+class RecoveryRateUp  extends GiaEffectRelatedWithAbility
 {
     const NAME = "RecoveryRateUp";
     const NAME_JP = "回復速度アップ";

@@ -1,13 +1,13 @@
 <?php
 
 
-namespace gia\data\gia_effects;
+namespace gia\models\gia_effects;
 
 
-use gia\data\GiaEffectUpAbility;
+use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\DefensivePower;
 
-class DefensivePowerUp extends GiaEffectUpAbility
+class DefensivePowerUp extends GiaEffectRelatedWithAbility
 {
     const NAME = "DefensivePowerUp";
     const NAME_JP = "防御力アップ";

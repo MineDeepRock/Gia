@@ -4,7 +4,7 @@
 namespace gia\data\player_abilities;
 
 
-use gia\data\GiaEffect;
+use gia\models\GiaEffect;
 
 class Blind extends GiaEffect
 {

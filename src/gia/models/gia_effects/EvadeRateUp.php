@@ -1,13 +1,13 @@
 <?php
 
 
-namespace gia\data\gia_effects;
+namespace gia\models\gia_effects;
 
 
-use gia\data\GiaEffectUpAbility;
+use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\EvadeRate;
 
-class EvadeRateUp extends GiaEffectUpAbility
+class EvadeRateUp extends GiaEffectRelatedWithAbility
 {
     const NAME = "EvadeRateUp";
     const NAME_JP = "回避率アップ";

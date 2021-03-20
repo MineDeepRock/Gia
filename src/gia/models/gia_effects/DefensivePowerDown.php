@@ -1,13 +1,13 @@
 <?php
 
 
-namespace gia\data\gia_effects;
+namespace gia\models\gia_effects;
 
 
-use gia\data\GiaEffectDownAbility;
+use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\DefensivePower;
 
-class DefensivePowerDown extends GiaEffectDownAbility
+class DefensivePowerDown extends GiaEffectRelatedWithAbility
 {
     const NAME = "DefensivePowerDown";
     const NAME_JP = "防御力ダウン";

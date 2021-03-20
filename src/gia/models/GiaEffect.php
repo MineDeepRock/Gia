@@ -1,7 +1,7 @@
 <?php
 
 
-namespace gia\data;
+namespace gia\models;
 
 
 //定義でしかない

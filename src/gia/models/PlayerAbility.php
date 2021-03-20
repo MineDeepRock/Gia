@@ -8,9 +8,13 @@ abstract class PlayerAbility
 {
     const NAME = "";
     const NAME_JP = "";
+    const MAX_VALUE = 20;
+    const MINIMUM_VALUE = 0;
     const INITIAL_VALUE = 5;
 
     private int $value;
+    private int $addedValue = 0;
+    private int $reducedValue = 0;
 
     public function __construct() {
         $this->value = static::INITIAL_VALUE;
@@ -20,24 +24,43 @@ abstract class PlayerAbility
         return $this->value / static::INITIAL_VALUE;
     }
 
-    public function addValue(int $value): void {
-        $this->value += $value;
 
-        if ($value < 0) $this->value = 0;
-        if ($value > 20) $this->value = 20;
+    //TODO:asReverseで判断
+    public function up(int $value, bool $asReverse = false): void {
+        if ($asReverse) {
+            $this->reducedValue -= abs($value);
+        } else {
+            $this->addedValue += abs($value);
+        }
+
+        $this->value = $this->addedValue - $this->reducedValue;
+        if ($this->value > static::MAX_VALUE) $this->value = static::MAX_VALUE;
+        if ($this->value < static::MINIMUM_VALUE) $this->value = static::MINIMUM_VALUE;
     }
 
-    public function up(int $value): void {
-        $this->value += abs($value);
+    public function down(int $value, bool $asReverse = false): void {
+        if ($asReverse) {
+            $this->addedValue -= abs($value);
+        } else {
+            $this->reducedValue += abs($value);
+        }
 
-        if ($value < 0) $this->value = 0;
-        if ($value > 20) $this->value = 20;
+        $this->value = $this->addedValue - $this->reducedValue;
+        if ($this->value > static::MAX_VALUE) $this->value = static::MAX_VALUE;
+        if ($this->value < static::MINIMUM_VALUE) $this->value = static::MINIMUM_VALUE;
     }
 
-    public function down(int $value): void {
-        $this->value -= abs($value);
+    /**
+     * @return int
+     */
+    public function getAddedValue(): int {
+        return $this->addedValue;
+    }
 
-        if ($value < 0) $this->value = 0;
-        if ($value > 20) $this->value = 20;
+    /**
+     * @return int
+     */
+    public function getReducedValue(): int {
+        return $this->reducedValue;
     }
 }

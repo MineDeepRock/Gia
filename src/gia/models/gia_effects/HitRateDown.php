@@ -1,13 +1,13 @@
 <?php
 
 
-namespace gia\data\gia_effects;
+namespace gia\models\gia_effects;
 
 
-use gia\data\GiaEffectDownAbility;
+use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\HitRate;
 
-class HitRateDown extends GiaEffectDownAbility
+class HitRateDown extends GiaEffectRelatedWithAbility
 {
     const NAME = "HitRateDown";
     const NAME_JP = "命中率ダウン";

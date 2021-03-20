@@ -1,13 +1,13 @@
 <?php
 
 
-namespace gia\data\gia_effects;
+namespace gia\models\gia_effects;
 
 
-use gia\data\GiaEffectDownAbility;
+use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\MovingVelocity;
 
-class MovingVelocityDown extends GiaEffectDownAbility
+class MovingVelocityDown extends GiaEffectRelatedWithAbility
 {
     const NAME = "MovingVelocityDown";
     const NAME_JP = "移動速度ダウン";

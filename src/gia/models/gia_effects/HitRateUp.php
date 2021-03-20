@@ -1,13 +1,13 @@
 <?php
 
 
-namespace gia\data\gia_effects;
+namespace gia\models\gia_effects;
 
 
-use gia\data\GiaEffectUpAbility;
+use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\HitRate;
 
-class HitRateUp extends GiaEffectUpAbility
+class HitRateUp extends GiaEffectRelatedWithAbility
 {
     const NAME = "HitRateUp";
     const NAME_JP = "命中率アップ";
