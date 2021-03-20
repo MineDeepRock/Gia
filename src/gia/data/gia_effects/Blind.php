@@ -1,7 +1,7 @@
 <?php
 
 
-namespace gia\models\player_abilities;
+namespace gia\data\player_abilities;
 
 
 use gia\data\GiaEffect;
