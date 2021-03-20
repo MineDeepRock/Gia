@@ -20,6 +20,12 @@ abstract class PlayerAbility
         return $this->value / static::INITIAL_VALUE;
     }
 
+    public function addValue(int $value): void {
+        $this->value += $value;
+
+        if ($value < 0) $this->value = 0;
+        if ($value > 20) $this->value = 20;
+    }
 
     public function up(int $value): void {
         $this->value += abs($value);
