@@ -6,6 +6,7 @@ namespace gia\pmmp\scoreboards;
 
 use gia\store\PlayerStatusStore;
 use gia\utilities\ConvertAbilityToText;
+use gia\utilities\ConvertEnergyToText;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 use scoreboard_builder\Score;
@@ -27,6 +28,7 @@ class PlayerStatusScoreboard extends Scoreboard
             new Score(TextFormat::BOLD . "> 命中:" . TextFormat::RESET . ConvertAbilityToText::execute($status->getHitRate())),
             new Score(TextFormat::BOLD . "> 移動:" . TextFormat::RESET . ConvertAbilityToText::execute($status->getMovingVelocity())),
             new Score(TextFormat::BOLD . "> 回復:" . TextFormat::RESET . ConvertAbilityToText::execute($status->getRecoveryRate())),
+            new Score(TextFormat::BOLD . "> 燃料:" . TextFormat::RESET . ConvertEnergyToText::execute($status->getEnergy())),
         ];
         return parent::__create(ScoreboardSlot::sideBar(), "Lobby", $scores, ScoreSortType::smallToLarge());
     }

@@ -4,7 +4,7 @@ namespace gia\aggregates;
 
 
 use gia\events\UpdatedPlayerStatusEvent;
-use gia\models\GiaEffect;
+use gia\models\Energy;
 use gia\models\AbilityGiaEffect;
 use gia\models\player_abilities\AttackPower;
 use gia\models\player_abilities\DefensivePower;
@@ -29,6 +29,8 @@ class PlayerStatus
     private string $name;
 
     //外から操作をしない,getterはしかたなく置く
+    private Energy $energy;
+
     private AttackPower $attackPower;
     private DefensivePower $defensivePower;
     private EvadeRate $evadeRate;
@@ -40,6 +42,7 @@ class PlayerStatus
         $this->name = $name;
         $this->scheduler = $scheduler;
 
+        $this->energy = new Energy($name, $scheduler);
         $this->attackPower = new AttackPower();
         $this->defensivePower = new DefensivePower();
         $this->evadeRate = new EvadeRate();
@@ -133,6 +136,14 @@ class PlayerStatus
     public function close(): void {
         foreach ($this->handlers as $handler) {
             $handler->cancel();
+            $this->energy->close();
         }
+    }
+
+    /**
+     * @return Energy
+     */
+    public function getEnergy(): Energy {
+        return $this->energy;
     }
 }
