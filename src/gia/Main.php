@@ -19,6 +19,7 @@ use gia\models\gia_effects\MovingVelocityUp;
 use gia\models\gia_effects\RecoveryRateDown;
 use gia\models\gia_effects\RecoveryRateUp;
 use gia\pmmp\scoreboards\PlayerStatusScoreboard;
+use gia\pmmp\services\UpdatePlayerSpeedPMMPService;
 use gia\store\PlayerStatusStore;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -45,7 +46,10 @@ class Main extends PluginBase implements Listener
         $player = Server::getInstance()->getPlayer($event->getPlayerName());
         if ($player === null) return;
         if (!$player->isOnline()) return;
+
+        $playerStatus = PlayerStatusStore::findByName($player->getName());
         PlayerStatusScoreboard::update($player);
+        UpdatePlayerSpeedPMMPService::execute($player, $playerStatus->getMovingVelocity()->getAsRate());
     }
 
 
@@ -97,7 +101,7 @@ class Main extends PluginBase implements Listener
                     return false;
             }
 
-            $status->addGiaEffectRelatedWithAbility($effect);
+            $status->addAbilityGiaEffect($effect);
             return true;
         }
 

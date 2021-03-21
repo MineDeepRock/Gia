@@ -5,7 +5,7 @@ namespace gia\aggregates;
 
 use gia\events\UpdatedPlayerStatusEvent;
 use gia\models\GiaEffect;
-use gia\models\GiaEffectRelatedWithAbility;
+use gia\models\AbilityGiaEffect;
 use gia\models\player_abilities\AttackPower;
 use gia\models\player_abilities\DefensivePower;
 use gia\models\player_abilities\EvadeRate;
@@ -56,7 +56,7 @@ class PlayerStatus
         return $this->name;
     }
 
-    public function addGiaEffectRelatedWithAbility(GiaEffectRelatedWithAbility $giaEffect) {
+    public function addAbilityGiaEffect(AbilityGiaEffect $giaEffect) {
         $giaEffect->act($this->getAbilityFromName($giaEffect::RELATED_ABILITY_NAME));
         $event = new UpdatedPlayerStatusEvent($this->name);
         $event->call();

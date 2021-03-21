@@ -4,11 +4,11 @@
 namespace gia\models\gia_effects;
 
 
-use gia\models\GiaEffectCommandType;
-use gia\models\GiaEffectRelatedWithAbility;
+use gia\models\AbilityGiaEffectCommandType;
+use gia\models\AbilityGiaEffect;
 use gia\models\player_abilities\AttackPower;
 
-class AttackPowerDown extends GiaEffectRelatedWithAbility
+class AttackPowerDown extends AbilityGiaEffect
 {
     const NAME = "AttackPowerDown";
     const NAME_JP = "攻撃力ダウン";
@@ -16,6 +16,6 @@ class AttackPowerDown extends GiaEffectRelatedWithAbility
 
     public function __construct(int $value, int $seconds) {
         parent::__construct($value, $seconds);
-        $this->commandType = GiaEffectCommandType::Down();
+        $this->commandType = AbilityGiaEffectCommandType::Down();
     }
 }

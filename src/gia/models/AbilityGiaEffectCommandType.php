@@ -4,7 +4,7 @@
 namespace gia\models;
 
 
-class GiaEffectCommandType
+class AbilityGiaEffectCommandType
 {
     private string $type;
 

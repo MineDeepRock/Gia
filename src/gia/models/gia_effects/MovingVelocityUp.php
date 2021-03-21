@@ -4,11 +4,11 @@
 namespace gia\models\gia_effects;
 
 
-use gia\models\GiaEffectCommandType;
-use gia\models\GiaEffectRelatedWithAbility;
+use gia\models\AbilityGiaEffectCommandType;
+use gia\models\AbilityGiaEffect;
 use gia\models\player_abilities\MovingVelocity;
 
-class MovingVelocityUp extends GiaEffectRelatedWithAbility
+class MovingVelocityUp extends AbilityGiaEffect
 {
     const NAME = "MovingVelocityUp";
     const NAME_JP = "移動速度アップ";
@@ -16,6 +16,6 @@ class MovingVelocityUp extends GiaEffectRelatedWithAbility
 
     public function __construct(int $value, int $seconds) {
         parent::__construct($value, $seconds);
-        $this->commandType = GiaEffectCommandType::Up();
+        $this->commandType = AbilityGiaEffectCommandType::Up();
     }
 }
