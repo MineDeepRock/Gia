@@ -6,6 +6,7 @@ namespace gia\aggregates;
 use gia\events\UpdatedPlayerStatusEvent;
 use gia\models\Energy;
 use gia\models\AbilityGiaEffect;
+use gia\models\Gia;
 use gia\models\player_abilities\AttackPower;
 use gia\models\player_abilities\DefensivePower;
 use gia\models\player_abilities\EvadeRate;
@@ -30,7 +31,6 @@ class PlayerStatus
 
     //外から操作をしない,getterはしかたなく置く
     private Energy $energy;
-
     private AttackPower $attackPower;
     private DefensivePower $defensivePower;
     private EvadeRate $evadeRate;
@@ -89,6 +89,15 @@ class PlayerStatus
             default:
                 return null;
         }
+    }
+
+    public function canActiveGia(Gia $gia): bool {
+        return $this->energy->getValue() >= $gia->getSpendEnergyAmount();
+    }
+
+
+    public function activeGia(Gia $gia): bool {
+        return $this->energy->spend($gia->getSpendEnergyAmount());
     }
 
     /**
