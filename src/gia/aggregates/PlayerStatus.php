@@ -3,6 +3,7 @@
 namespace gia\aggregates;
 
 
+use gia\events\UpdatedPlayerStatusEvent;
 use gia\models\GiaEffect;
 use gia\models\GiaEffectRelatedWithAbility;
 use gia\models\player_abilities\AttackPower;
@@ -13,15 +14,21 @@ use gia\models\player_abilities\MovingVelocity;
 use gia\models\player_abilities\RecoveryRate;
 use gia\models\PlayerAbility;
 use pocketmine\scheduler\ClosureTask;
+use pocketmine\scheduler\TaskHandler;
 use pocketmine\scheduler\TaskScheduler;
 
 class PlayerStatus
 {
+
+    /**
+     * @var TaskHandler[]
+     */
+    private array $handlers = [];
     private TaskScheduler $scheduler;
 
     private string $name;
 
-    //外からは触らせない
+    //外から操作をしない,getterはしかたなく置く
     private AttackPower $attackPower;
     private DefensivePower $defensivePower;
     private EvadeRate $evadeRate;
@@ -29,13 +36,9 @@ class PlayerStatus
     private MovingVelocity $movingVelocity;
     private RecoveryRate $recoveryRate;
 
-    /**
-     * @var GiaEffect[]
-     */
-    private array $giaEffects = [];
-
-    public function __construct(string $name) {
+    public function __construct(string $name, TaskScheduler $scheduler) {
         $this->name = $name;
+        $this->scheduler = $scheduler;
 
         $this->attackPower = new AttackPower();
         $this->defensivePower = new DefensivePower();
@@ -53,24 +56,17 @@ class PlayerStatus
         return $this->name;
     }
 
-    public function findGiaEffectByName(string $name): array {
-        $giaEffects = [];
-        foreach ($this->giaEffects as $giaEffect) {
-            if ($giaEffect::NAME === $name) {
-                $giaEffects[] = $giaEffect;
-            }
-        }
-
-        return $giaEffects;
-    }
-
     public function addGiaEffectRelatedWithAbility(GiaEffectRelatedWithAbility $giaEffect) {
         $giaEffect->act($this->getAbilityFromName($giaEffect::RELATED_ABILITY_NAME));
+        $event = new UpdatedPlayerStatusEvent($this->name);
+        $event->call();
 
-        $this->scheduler->scheduleDelayedTask(new ClosureTask(function (int $tick) use ($giaEffect) {
+        $handler = $this->scheduler->scheduleDelayedTask(new ClosureTask(function (int $tick) use ($giaEffect) : void {
             $giaEffect->reverse($this->getAbilityFromName($giaEffect::RELATED_ABILITY_NAME));
+            $event = new UpdatedPlayerStatusEvent($this->name);
+            $event->call();
         }), 20 * $giaEffect->getSeconds());
-
+        $this->handlers[] = $handler;
     }
 
     private function getAbilityFromName(string $name): ?PlayerAbility {
@@ -89,6 +85,54 @@ class PlayerStatus
                 return $this->recoveryRate;
             default:
                 return null;
+        }
+    }
+
+    /**
+     * @return AttackPower
+     */
+    public function getAttackPower(): AttackPower {
+        return $this->attackPower;
+    }
+
+    /**
+     * @return DefensivePower
+     */
+    public function getDefensivePower(): DefensivePower {
+        return $this->defensivePower;
+    }
+
+    /**
+     * @return EvadeRate
+     */
+    public function getEvadeRate(): EvadeRate {
+        return $this->evadeRate;
+    }
+
+    /**
+     * @return HitRate
+     */
+    public function getHitRate(): HitRate {
+        return $this->hitRate;
+    }
+
+    /**
+     * @return MovingVelocity
+     */
+    public function getMovingVelocity(): MovingVelocity {
+        return $this->movingVelocity;
+    }
+
+    /**
+     * @return RecoveryRate
+     */
+    public function getRecoveryRate(): RecoveryRate {
+        return $this->recoveryRate;
+    }
+
+    public function close(): void {
+        foreach ($this->handlers as $handler) {
+            $handler->cancel();
         }
     }
 }

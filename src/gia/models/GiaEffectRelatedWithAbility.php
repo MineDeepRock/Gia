@@ -6,7 +6,7 @@ namespace gia\models;
 
 abstract class GiaEffectRelatedWithAbility extends GiaEffect
 {
-    private GiaEffectCommandType $commandType;
+    protected GiaEffectCommandType $commandType;
 
     public function act(PlayerAbility $ability) {
         if ($this->commandType->equals(GiaEffectCommandType::Up())) {

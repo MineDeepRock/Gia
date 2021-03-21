@@ -7,6 +7,9 @@ use gia\aggregates\PlayerStatus;
 
 class PlayerStatusStore
 {
+    /**
+     * @var PlayerStatus[]
+     */
     static array $playerStatusList = [];
 
     static function add(PlayerStatus $playerStatus): bool {
@@ -20,7 +23,7 @@ class PlayerStatusStore
 
         foreach (self::$playerStatusList as $key => $playerStatus) {
             if ($playerStatus->getName() === $name) {
-                self::$playerStatusList[$key]->stopTransformTimer();
+                self::$playerStatusList[$key]->close();
                 unset(self::$playerStatusList[$key]);
             }
         }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d240faf74b6f12cf1f49451372a8580d",
+    "content-hash": "0cad2b3538a06add5c18ffb4f923b4c4",
     "packages": [
         {
             "name": "adhocore/json-comment",
@@ -53,6 +53,33 @@
                 "source": "https://github.com/adhocore/php-json-comment/tree/0.1.0"
             },
             "time": "2020-01-03T13:51:23+00:00"
+        },
+        {
+            "name": "mine_deep_rock/scoreboard_builder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MineDeepRock/scoreboard_builder",
+                "reference": "7b31322887305893565f621b618a47d8b2f3bb7b"
+            },
+            "require": {
+                "pocketmine/pocketmine-mp": "*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": [
+                        "src/"
+                    ]
+                }
+            },
+            "authors": [
+                {
+                    "name": "suinua"
+                }
+            ],
+            "time": "2020-09-16T15:31:55+00:00"
         },
         {
             "name": "pocketmine/binaryutils",
@@ -570,7 +597,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mine_deep_rock/scoreboard_builder": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

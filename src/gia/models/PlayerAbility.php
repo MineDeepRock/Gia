@@ -8,7 +8,7 @@ abstract class PlayerAbility
 {
     const NAME = "";
     const NAME_JP = "";
-    const MAX_VALUE = 20;
+    const MAX_VALUE = 10;
     const MINIMUM_VALUE = 0;
     const INITIAL_VALUE = 5;
 
@@ -32,7 +32,7 @@ abstract class PlayerAbility
             $this->addedValue += abs($value);
         }
 
-        $this->value = $this->addedValue - $this->reducedValue;
+        $this->value = static::INITIAL_VALUE + $this->addedValue - $this->reducedValue;
         if ($this->value > static::MAX_VALUE) $this->value = static::MAX_VALUE;
         if ($this->value < static::MINIMUM_VALUE) $this->value = static::MINIMUM_VALUE;
     }
@@ -44,7 +44,7 @@ abstract class PlayerAbility
             $this->reducedValue += abs($value);
         }
 
-        $this->value = $this->addedValue - $this->reducedValue;
+        $this->value = static::INITIAL_VALUE + $this->addedValue - $this->reducedValue;
         if ($this->value > static::MAX_VALUE) $this->value = static::MAX_VALUE;
         if ($this->value < static::MINIMUM_VALUE) $this->value = static::MINIMUM_VALUE;
     }
@@ -61,5 +61,12 @@ abstract class PlayerAbility
      */
     public function getReducedValue(): int {
         return $this->reducedValue;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValue(): int {
+        return $this->value;
     }
 }
