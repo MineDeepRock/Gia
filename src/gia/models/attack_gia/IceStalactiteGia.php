@@ -14,6 +14,7 @@ class IceStalactiteGia extends AttackGia
     const NAME = "IceStalactite";
     const Damage = 5;
     const Range = 8;
+    const HitRate = 0.9;
 
     public function __construct() {
         $giaEffects = [

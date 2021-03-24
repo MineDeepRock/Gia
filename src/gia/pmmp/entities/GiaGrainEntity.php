@@ -6,7 +6,7 @@ namespace gia\pmmp\entities;
 
 use gia\models\attack_gia\IceBallGia;
 use gia\pmmp\directions\ActivatedIceBallDirection;
-use gia\pmmp\services\ActivateAttackGia;
+use gia\pmmp\services\ActivateAttackGiaPMMPService;
 use pocketmine\entity\Entity;
 use pocketmine\level\Level;
 use pocketmine\nbt\tag\CompoundTag;

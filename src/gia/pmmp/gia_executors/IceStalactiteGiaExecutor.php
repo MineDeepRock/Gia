@@ -7,7 +7,7 @@ namespace gia\pmmp\gia_executors;
 use gia\models\attack_gia\IceStalactiteGia;
 use gia\pmmp\directions\LockOnIceStalactiteGiaDirection;
 use gia\pmmp\directions\ReadyIceStalactiteGiaDirection;
-use gia\pmmp\services\ActivateAttackGia;
+use gia\pmmp\services\ActivateAttackGiaPMMPService;
 use gia\pmmp\utilities\EntityFinder;
 use gia\store\PlayerStatusStore;
 use pocketmine\entity\Entity;
@@ -34,7 +34,7 @@ class IceStalactiteGiaExecutor
         $scheduler->scheduleDelayedTask(new ClosureTask(function (int $tick) use ($level, $invoker, $center, $targets): void {
             if (!$invoker->isOnline()) return;
             LockOnIceStalactiteGiaDirection::summon($level, $targets);
-            ActivateAttackGia::execute($invoker, $center, new IceStalactiteGia(), $targets);
+            ActivateAttackGiaPMMPService::execute($invoker, $center, new IceStalactiteGia(), $targets);
         }), 20 * 0.5);
     }
 }

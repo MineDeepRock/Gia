@@ -13,6 +13,7 @@ class IceBallGia extends AttackGia
 {
     const NAME = "IceBall";
     const Damage = 10;
+    const HitRate = 1.0;
 
     public function __construct() {
         $giaEffects = [

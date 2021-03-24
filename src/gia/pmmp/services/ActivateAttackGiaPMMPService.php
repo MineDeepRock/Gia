@@ -5,13 +5,15 @@ namespace gia\pmmp\services;
 
 
 use gia\models\AttackGia;
+use gia\utilities\CalculateDamage;
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
 
-class ActivateAttackGia
+//TODO:Rename invoke→invoker→executor→activateはおかしい
+class ActivateAttackGiaPMMPService
 {
     /**
      * @param Player $invoker
@@ -20,9 +22,21 @@ class ActivateAttackGia
      * @param Entity[] $targets
      */
     static function execute(Player $invoker, Vector3 $activatedPosition, AttackGia $gia, array $targets): void {
-        $damage = $gia::Damage;
 
         foreach ($targets as $target) {
+            if ($target instanceof Player) {
+                $damage = CalculateDamage::execute($invoker->getName(), $target->getName(), $gia::Damage);
+            } else {
+                $damage = CalculateDamage::execute($invoker->getName(), "", $gia::Damage);
+            }
+
+            if ($damage === -1) {
+                if ($target instanceof Player) {
+                    $target->sendPopup("回避");
+                }
+                continue;
+            }
+
             $source = new EntityDamageByEntityEvent($invoker, $target, EntityDamageEvent::CAUSE_CONTACT, $damage, [], 0);
             $source->call();
             $target->setLastDamageCause($source);
