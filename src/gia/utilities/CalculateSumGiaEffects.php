@@ -4,7 +4,8 @@
 namespace gia\utilities;
 
 
-use gia\data\GiaEffect;
+
+use gia\models\GiaEffect;
 
 class CalculateSumGiaEffects
 {

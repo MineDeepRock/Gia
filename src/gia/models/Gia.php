@@ -4,8 +4,6 @@
 namespace gia\models;
 
 
-use gia\store\PlayerStatusStore;
-
 class Gia
 {
     const NAME = "";

@@ -14,6 +14,7 @@ use gia\models\player_abilities\HitRate;
 use gia\models\player_abilities\MovingVelocity;
 use gia\models\player_abilities\RecoveryRate;
 use gia\models\PlayerAbility;
+use gia\models\TeamId;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\scheduler\TaskHandler;
 use pocketmine\scheduler\TaskScheduler;
@@ -28,6 +29,7 @@ class PlayerStatus
     private TaskScheduler $scheduler;
 
     private string $name;
+    private ?TeamId $teamId;
 
     //外から操作をしない,getterはしかたなく置く
     private Energy $energy;
@@ -49,7 +51,7 @@ class PlayerStatus
         $this->hitRate = new HitRate();
         $this->movingVelocity = new MovingVelocity();
         $this->recoveryRate = new RecoveryRate();
-
+        $this->teamId = null;
     }
 
     /**
@@ -154,5 +156,19 @@ class PlayerStatus
      */
     public function getEnergy(): Energy {
         return $this->energy;
+    }
+
+    /**
+     * @param TeamId|null $teamId
+     */
+    public function setTeamId(?TeamId $teamId): void {
+        $this->teamId = $teamId;
+    }
+
+    /**
+     * @return TeamId|null
+     */
+    public function getTeamId(): ?TeamId {
+        return $this->teamId;
     }
 }
