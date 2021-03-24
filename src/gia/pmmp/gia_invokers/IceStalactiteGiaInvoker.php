@@ -4,7 +4,7 @@
 namespace gia\pmmp\gia_invokers;
 
 
-use gia\pmmp\entities\IceBallEntity;
+use gia\pmmp\entities\IceStalactiteGrainEntity;
 use pocketmine\entity\Entity;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\DoubleTag;
@@ -13,7 +13,7 @@ use pocketmine\nbt\tag\ListTag;
 use pocketmine\Player;
 use pocketmine\scheduler\TaskScheduler;
 
-class IceBallInvoker
+class IceStalactiteGiaInvoker
 {
     static function invoke(Player $invoker, Entity $target, TaskScheduler $scheduler): void {
         $nbt = new CompoundTag('', [
@@ -34,7 +34,7 @@ class IceBallInvoker
         ]);
 
 
-        $entity = new IceBallEntity($invoker->getLevel(), $nbt, $invoker, $target, $scheduler);
+        $entity = new IceStalactiteGrainEntity($invoker->getLevel(), $nbt, $invoker, $target, $scheduler);
         $entity->spawnToAll();
     }
 }

@@ -7,6 +7,8 @@ namespace gia\pmmp\utilities;
 use gia\models\TeamId;
 use gia\store\PlayerStatusStore;
 use pocketmine\entity\Entity;
+use pocketmine\entity\Monster;
+use pocketmine\entity\Zombie;
 use pocketmine\level\Level;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
@@ -45,10 +47,9 @@ class EntityFinder
             if ($playerStatus->getTeamId() === null) continue;
             if (!$playerStatus->getTeamId()->equals($teamId)) continue;
 
-            if ($distance === null) {
+            if ($result === null or $player->distance($vector3) < $distance) {
                 $result = $player;
-            } else if ($player->distance($vector3) < $distance) {
-                $result = $player;
+                $distance = $player->distance($vector3);
             }
         }
 
@@ -64,10 +65,9 @@ class EntityFinder
             if ($playerStatus->getTeamId() === null) continue;
             if ($playerStatus->getTeamId()->equals($teamId)) continue;
 
-            if ($distance === null) {
+            if ($result === null or $player->distance($vector3) < $distance) {
                 $result = $player;
-            } else if ($player->distance($vector3) < $distance) {
-                $result = $player;
+                $distance = $player->distance($vector3);
             }
         }
 
@@ -79,10 +79,10 @@ class EntityFinder
         $distance = null;
         foreach ($level->getEntities() as $entity) {
             if ($entity instanceof Player) continue;
-            if ($distance === null) {
+            if (!($entity instanceof Monster)) continue;
+            if ($result === null or $entity->distance($vector3) < $distance) {
                 $result = $entity;
-            } else if ($entity->distance($vector3) < $distance) {
-                $result = $entity;
+                $distance = $entity->distance($vector3);
             }
         }
 
@@ -94,27 +94,28 @@ class EntityFinder
         $result = null;
         $distance = null;
         foreach ($level->getPlayers() as $player) {
-            if ($distance === null) {
+            if ($result === null or $player->distance($vector3) < $distance) {
                 $result = $player;
-            } else if ($player->distance($vector3) < $distance) {
-                $result = $player;
+                $distance = $player->distance($vector3);
             }
         }
 
         return $result;
     }
 
-    static private function getAroundEntities(Level $level, Vector3 $vector3, float $distance): array {
+    static function getAroundEntities(Level $level, Vector3 $vector3, float $range): array {
         $entities = [];
 
         foreach ($level->getEntities() as $entity) {
-            if ($entity->distance($vector3) <= $distance) $entities[] = $entity;
+            if ($entity instanceof Player) continue;
+            if (!($entity instanceof Monster)) continue;
+            if ($entity->distance($vector3) <= $range) $entities[] = $entity;
         }
 
         return $entities;
     }
 
-    static private function getAroundPlayers(Level $level, Vector3 $vector3, float $distance): array {
+    static function getAroundPlayers(Level $level, Vector3 $vector3, float $distance): array {
         $players = [];
 
         foreach ($level->getPlayers() as $player) {

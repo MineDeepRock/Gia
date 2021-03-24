@@ -13,7 +13,7 @@ use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\Player;
 use pocketmine\scheduler\TaskScheduler;
 
-class IceBall extends EntityBase implements InvincibleEntity
+abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
 {
     const NAME = "IceBall";
 
@@ -26,9 +26,10 @@ class IceBall extends EntityBase implements InvincibleEntity
     public $eyeHeight = 1.0;
     protected $gravity = 0;
 
-    private TaskScheduler $scheduler;
-    private Player $invoker;
-    private Entity $target;
+
+    protected TaskScheduler $scheduler;
+    protected Player $invoker;
+    protected Entity $target;
 
     public function __construct(Level $level, CompoundTag $nbt, Player $invoker, Entity $target, TaskScheduler $scheduler) {
         $this->scheduler = $scheduler;
@@ -41,20 +42,21 @@ class IceBall extends EntityBase implements InvincibleEntity
         $this->lookAt($this->target->asVector3()->add(0, 1));
         $direction = $this->getDirectionVector();
 
-        $distance = $this->target->asVector3()->add(0, -1)->distance($this);
+        $distance = $this->target->asVector3()->add(0, 1)->distance($this);
         //TODO : 近づくと加速するように
         $speed = $distance >= 20 ? 1.5 : 2;
 
-        $this->motion->x = $direction->getX() * 1.5;
-        $this->motion->y = $direction->getY() * 1.5;
-        $this->motion->z = $direction->getZ() * 1.5;
+        $this->motion->x = $direction->getX() * $speed;
+        $this->motion->y = $direction->getY() * $speed;
+        $this->motion->z = $direction->getZ() * $speed;
 
         if ($distance <= 1) {
-            ActivatedIceBallDirection::summon($this->getLevel(), $this->getPosition(), $this->scheduler);
-            ActivateAttackGia::execute($this->invoker, $this->getPosition(), new IceBallGia(), [$this->target]);
+            $this->onActive();
             $this->kill();
         }
 
         return parent::entityBaseTick($tickDiff);
     }
+
+    abstract function onActive():void;
 }

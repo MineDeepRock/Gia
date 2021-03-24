@@ -6,5 +6,7 @@ api: [3.0.0]
 commands:
   iceball:
     usage: "/iceball"
-    description: "iceball"
+    permission: op
+  icestalactite:
+    usage: "/icestalactite"
     permission: op
