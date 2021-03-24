@@ -12,14 +12,16 @@ class GiaEffect
     const RELATED_ABILITY_NAME = "";
 
     private GiaEffectTargetType $targetType;
+    private float $range;
 
     private int $value;
     private int $seconds;
 
-    public function __construct(int $value, int $seconds, GiaEffectTargetType $giaEffectTargetType) {
+    public function __construct(int $value, int $seconds, GiaEffectTargetType $giaEffectTargetType, float $range = 0) {
         $this->value = $value;
         $this->seconds = $seconds;
         $this->targetType = $giaEffectTargetType;
+        $this->range = $range;
     }
 
     /**
@@ -41,5 +43,12 @@ class GiaEffect
      */
     public function getTargetType(): GiaEffectTargetType {
         return $this->targetType;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getRange() {
+        return $this->range;
     }
 }

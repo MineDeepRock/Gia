@@ -15,8 +15,8 @@ class MovingVelocityUp extends AbilityGiaEffect
     const NAME_JP = "移動速度アップ";
     const RELATED_ABILITY_NAME = MovingVelocity::NAME;
 
-    public function __construct(int $value, int $seconds, GiaEffectTargetType $targetType) {
-        parent::__construct($value, $seconds, $targetType);
+    public function __construct(int $value, int $seconds, GiaEffectTargetType $targetType, float $range = 0) {
+        parent::__construct($value, $seconds, $targetType, $range);
         $this->commandType = AbilityGiaEffectCommandType::Up();
     }
 }

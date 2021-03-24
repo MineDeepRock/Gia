@@ -12,8 +12,8 @@ class GiaEffectTargetType
         $this->type = $type;
     }
 
-    public function equals(self $commandType): bool {
-        return $this->type == $commandType->type;
+    public function equals(self $giaEffectTargetType): bool {
+        return $this->type == $giaEffectTargetType->type;
     }
 
     public static function MySelf(): self {

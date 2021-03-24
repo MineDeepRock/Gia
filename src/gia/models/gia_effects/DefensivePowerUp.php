@@ -15,8 +15,8 @@ class DefensivePowerUp extends AbilityGiaEffect
     const NAME_JP = "防御力アップ";
     const RELATED_ABILITY_NAME = DefensivePower::NAME;
 
-    public function __construct(int $value, int $seconds, GiaEffectTargetType $targetType) {
-        parent::__construct($value, $seconds, $targetType);
+    public function __construct(int $value, int $seconds, GiaEffectTargetType $targetType, float $range = 0) {
+        parent::__construct($value, $seconds, $targetType, $range);
         $this->commandType = AbilityGiaEffectCommandType::Up();
     }
 }
