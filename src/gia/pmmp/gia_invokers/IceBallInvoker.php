@@ -1,7 +1,7 @@
 <?php
 
 
-namespace gia\pmmp\utilities;
+namespace gia\pmmp\gia_invokers;
 
 
 use gia\pmmp\entities\IceBall;
@@ -13,9 +13,9 @@ use pocketmine\nbt\tag\ListTag;
 use pocketmine\Player;
 use pocketmine\scheduler\TaskScheduler;
 
-class SpawnIceBall
+class IceBallInvoker
 {
-    static function execute(Player $invoker, Entity $target, TaskScheduler $scheduler): void {
+    static function invoke(Player $invoker, Entity $target, TaskScheduler $scheduler): void {
         $nbt = new CompoundTag('', [
             'Pos' => new ListTag('Pos', [
                 new DoubleTag('', $invoker->getX()),
@@ -34,7 +34,6 @@ class SpawnIceBall
         ]);
 
 
-        var_dump(get_class($target));
         $entity = new IceBall($invoker->getLevel(), $nbt, $invoker, $target, $scheduler);
         $entity->spawnToAll();
     }

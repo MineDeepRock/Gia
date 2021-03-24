@@ -10,7 +10,6 @@ use gia\models\attack_gia\IceBallGia;
 use gia\pmmp\entities\InvincibleEntity;
 use gia\pmmp\scoreboards\PlayerStatusScoreboard;
 use gia\pmmp\services\InvokeAttackGiaPMMPService;
-use gia\pmmp\services\InvokeIceBallPMMPService;
 use gia\pmmp\services\UpdatePlayerSpeedPMMPService;
 use gia\store\PlayerStatusStore;
 use pocketmine\command\Command;

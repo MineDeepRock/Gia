@@ -6,8 +6,8 @@ namespace gia\pmmp\services;
 
 use gia\models\attack_gia\IceBallGia;
 use gia\models\AttackGia;
+use gia\pmmp\gia_invokers\IceBallInvoker;
 use gia\pmmp\utilities\FindGiaTarget;
-use gia\pmmp\utilities\SpawnIceBall;
 use gia\services\InvokeGiaService;
 use pocketmine\Player;
 use pocketmine\scheduler\TaskScheduler;
@@ -25,7 +25,7 @@ class InvokeAttackGiaPMMPService
 
         switch ($gia::NAME) {
             case IceBallGia::NAME:
-                SpawnIceBall::execute($invoker, $target, $scheduler);
+                IceBallInvoker::invoke($invoker, $target, $scheduler);
         }
     }
 }
