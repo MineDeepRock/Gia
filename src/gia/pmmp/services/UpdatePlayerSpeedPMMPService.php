@@ -10,6 +10,6 @@ use pocketmine\Player;
 class UpdatePlayerSpeedPMMPService
 {
     static function execute(Player $player, float $value): void {
-        $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue($value);
+        $player->getAttributeMap()->getAttribute(Attribute::MOVEMENT_SPEED)->setValue(0.1 * $value);
     }
 }
