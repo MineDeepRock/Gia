@@ -20,7 +20,8 @@ class ActivateAttackGia
      * @param Entity[] $targets
      */
     static function execute(Player $invoker, Vector3 $activatedPosition, AttackGia $gia, array $targets): void {
-        $damage = $gia->getDamage();
+        $damage = $gia::Damage;
+
         foreach ($targets as $target) {
             $source = new EntityDamageByEntityEvent($invoker, $target, EntityDamageEvent::CAUSE_CONTACT, $damage, [], 0);
             $source->call();

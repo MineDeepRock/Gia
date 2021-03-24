@@ -12,7 +12,7 @@ use gia\models\GiaTargetType;
 class IceBallGia extends AttackGia
 {
     const NAME = "IceBall";
-    protected float $damage = 10;
+    const Damage = 10;
 
     public function __construct() {
         $giaEffects = [
