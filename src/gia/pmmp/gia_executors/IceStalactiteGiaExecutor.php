@@ -18,6 +18,8 @@ use pocketmine\scheduler\TaskScheduler;
 class IceStalactiteGiaExecutor
 {
     static function execute(Player $invoker, Entity $target, TaskScheduler $scheduler): void {
+        if (!$invoker->isOnline()) return;
+
         $invokerStatus = PlayerStatusStore::findByName($invoker->getName());
         $center = $target->asVector3();
         $level = $invoker->getLevel();
