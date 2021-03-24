@@ -24,7 +24,7 @@ class LockOnIceStalactiteGiaDirection
                 if (!$target->isOnline()) continue;
             }
 
-            for ($i = 0; $i < 360; $i += 45) {
+            for ($i = 0; $i < 360; $i += 90) {
                 $x = 1.5 * sin(deg2rad($i));
                 $z = 1.5 * cos(deg2rad($i));
 

@@ -6,33 +6,19 @@ namespace gia\pmmp\directions;
 
 use pocketmine\block\Ice;
 use pocketmine\level\Level;
+use pocketmine\level\particle\DestroyBlockParticle;
 use pocketmine\math\Vector3;
-use pocketmine\scheduler\ClosureTask;
-use pocketmine\scheduler\TaskScheduler;
 
 class ActivatedIceBallDirection
 {
-    static function summon(Level $level, Vector3 $center, TaskScheduler $taskScheduler): void {
-        $replacedBlocks = [];
+    static function summon(Level $level, Vector3 $center): void {
+        for ($i = 0; $i < 360; $i += 90) {
+            $x = 1.5 * sin(deg2rad($i));
+            $z = 1.5 * cos(deg2rad($i));
 
-        $vectors = [
-            $center,
-            $center->add(1),
-            $center->add(-1),
-            $center->add(0, 0, 1),
-            $center->add(0, 0, -1),
-        ];
+            $pos = $center->asVector3()->add($x, 0.3, $z);
 
-        foreach ($vectors as $vector) {
-            $replacedBlocks[] = $level->getBlock($vector);
-            $level->setBlock($vector, new Ice());
+            $level->addParticle(new DestroyBlockParticle($pos, new Ice()));
         }
-
-
-        $taskScheduler->scheduleDelayedTask(new ClosureTask(function (int $tick) use ($level, $replacedBlocks): void {
-            foreach ($replacedBlocks as $replacedBlock) {
-                $level->setBlock($replacedBlock, $replacedBlock);
-            }
-        }), 20 * 0.5);
     }
 }

@@ -9,8 +9,8 @@ use gia\store\PlayerStatusStore;
 
 class CalculateDamage
 {
-    static function execute(string $attackerName, string $targetName, AttackGia $gia): int {
-        $damage = $gia::Damage;
+    static function execute(string $attackerName, string $targetName, float $giaDamage): int {
+        $damage = $giaDamage;
         $attackerStatus = PlayerStatusStore::findByName($attackerName);
         $targetStatus = PlayerStatusStore::findByName($targetName);
 
@@ -21,19 +21,8 @@ class CalculateDamage
             return $damage * $attackerStatus->getAttackPower()->getAsRate();
         }
 
-        $hitRate = $attackerStatus->getHitRate()->getAsRate();
-        $hitRate *= $gia::HitRate;
-        $hitRate /= $targetStatus->getEvadeRate()->getAsRate();
-
-        //あたっていない
-        //TODO:あたったかどうかは他で判断する
-        if (random_int(1, 100) < $hitRate * 100) {
-            return -1;
-        }
-
         $damage *= $attackerStatus->getAttackPower()->getAsRate();
         $damage /= $targetStatus->getDefensivePower()->getAsRate();
-
         return $damage;
     }
 }
