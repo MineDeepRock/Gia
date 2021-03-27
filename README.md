@@ -1,81 +1,79 @@
-- [ ] アンロックドギア
+
+TODO:  
+追尾系で相手が死んだときの処理
+  
+Invoker→invoke()  
+executer→execute()  
+ActiveGia～～→execute()  
+はおかしい  
+  
+呼び出し→発動→実行の順番に命名し直す
 
 # ギアエフェクト
 ## バフ
-- [x] 防御力アップ****
-
+- [x] 防御力アップ
 - [x] 攻撃力アップ
-
 - [x] 命中率アップ
-
 - [x] 回避率アップ
-
-- [ ] クロックの回復速度をアップ
-
+- [ ] エネルギーの回復速度をアップ
 - [ ] HP回復速度アップ
-
 - [x] 移動速度アップ
 
 
 ## デバフ
 - [x] 防御力ダウン
-
 - [x] 攻撃力ダウン
-
 - [x] 命中率ダウン
-
 - [x] 回避率ダウン
-
-- [ ] クロックの回復速度をダウン
-
+- [ ] エネルギーの回復速度をダウン
 - [ ] HP回復速度ダウン
-
 - [x] 移動速度ダウン
-
 - [ ] 画面酔
-
 - [ ] 盲目
+
+
+ステータス
+- 防御力
+- 攻撃力
+- 命中率
+- 回避率
+- HP回復速度
+- 移動速度
+
+攻撃系魔法
+- 攻撃力
+- 命中率
+- エネルギーの消費量
+- 相手or自身or仲間に与えるエフェクト
+
+エフェクト(バフ,デバフ)
+性能
+- 継続時間
+- 量
+
+種類
+- 防御力アップorダウン
+- 攻撃力アップorダウン
+- 命中率アップorダウン
+- 回避率アップorダウン
+- HP回復速度アップorダウン
 
 
 # ギア
 ## 攻撃系ギア  
-- [ ] heavy bomb 巨大な爆弾を撃つ
+- ダメージ
+- 命中率
+- 攻撃範囲
 
-#### +バフ
-- [ ] anteaters attack 敵にダメージ+自身の防御力アップ
-- [ ] anteaters attack around 周りの敵ダメージ+自身の防御力アップ
+- [x] ice ball 敵単体に氷の塊を飛ばす
+- [x] ice stalactite 敵複数に氷の塊を飛ばす
 
-- [ ] bees attack 敵にダメージ+自身の攻撃力アップ
-- [ ] bees attack around 周りの敵ダメージ+自身の攻撃力アップ
 
-- [ ] mantis attack 敵にダメージ+自身の命中率アップ
-- [ ] mantis attack around 周りの敵ダメージ+自身の命中率アップ
-
-- [ ] birds attack 敵にダメージ+自身の回避率アップ
-- [ ] birds attack around 周りの敵ダメージ+自身の回避率アップ
-
-- [ ] dragonfly attack 敵にダメージ+自身の移動速度アップ
-- [ ] dragonfly attack around 周りの敵ダメージ+自身の移動速度アップ
-
-#### +デバフ
-- [ ] ants bite 敵にダメージ+敵の防御力ダウン
-- [ ] ants bite around 周りの敵ダメージ+敵の防御力ダウン
-
-- [ ] butterfly dance 敵にダメージ+敵の攻撃力ダウン
-- [ ] butterfly dance around 周りの敵ダメージ+敵の攻撃力ダウン
-
-- [ ] mosquito songs 敵にダメージ+敵の命中率ダウン
-- [ ] mosquito songs around 周りの敵ダメージ+敵の命中率ダウン
-
-- [ ] spiders thread 敵にダメージ+敵の回避率ダウン
-- [ ] spiders thread around 周りの敵ダメージ+敵の回避率ダウン
-
-- [ ] slugs liquid 敵にダメージ+敵の移動速度ダウン
-- [ ] slugs liquid around 周りの敵ダメージ+敵の移動速度ダウン
 
 ## 防衛系ギア  
 - [ ] wall
 - [ ] decoy
+- [ ] counter
 
 ## 回復系ギア
 - [ ] cure 自身のHPを一定量回復 
@@ -101,8 +99,8 @@
 - [ ] aggressive mode 自身の攻撃力が一定時間アップ
 - [ ] aggressive mode around 自身+味方の攻撃力が一定時間アップ
 
-- [ ] armor skin 自身の防御力が一定時間アップ
-- [ ] armor skin around 自身+味方の防御力が一定時間アップ
+- [ ] armored skin 自身の防御力が一定時間アップ
+- [ ] armored skin around 自身+味方の防御力が一定時間アップ
 
 - [ ] birds sight 自身の命中率を一定時間アップ
 - [ ] birds sight around 自身+味方の命中率を一定時間アップ
