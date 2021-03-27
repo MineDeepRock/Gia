@@ -6,6 +6,7 @@ namespace gia;
 
 use gia\aggregates\PlayerStatus;
 use gia\events\UpdatedPlayerStatusEvent;
+use gia\models\attack_gia\FireBallGia;
 use gia\models\attack_gia\IceBallGia;
 use gia\models\attack_gia\IceStalactiteGia;
 use gia\pmmp\entities\InvincibleEntity;
@@ -56,11 +57,19 @@ class Main extends PluginBase implements Listener
         if (!($sender instanceof Player)) return false;
         if ($label === "iceball") {
             InvokeAttackGiaPMMPService::execute($sender, new IceBallGia(), $this->getScheduler());
+            return true;
         }
 
         if ($label === "icestalactite") {
             InvokeAttackGiaPMMPService::execute($sender, new IceStalactiteGia(), $this->getScheduler());
+            return true;
         }
+
+        if ($label === "fireball") {
+            InvokeAttackGiaPMMPService::execute($sender, new FireBallGia(), $this->getScheduler());
+            return true;
+        }
+        
         return false;
     }
 }
