@@ -63,7 +63,6 @@ abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
 
         if ($distance <= 1) {
             $this->onActive();
-            $this->kill();
         }
 
         return parent::entityBaseTick($tickDiff);

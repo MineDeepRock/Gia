@@ -9,6 +9,7 @@ use gia\events\UpdatedPlayerStatusEvent;
 use gia\models\attack_gia\FireBallGia;
 use gia\models\attack_gia\IceBallGia;
 use gia\models\attack_gia\IceStalactiteGia;
+use gia\models\attack_gia\LavaWaveGia;
 use gia\pmmp\entities\InvincibleEntity;
 use gia\pmmp\scoreboards\PlayerStatusScoreboard;
 use gia\pmmp\services\InvokeAttackGiaPMMPService;
@@ -67,6 +68,11 @@ class Main extends PluginBase implements Listener
 
         if ($label === "fireball") {
             InvokeAttackGiaPMMPService::execute($sender, new FireBallGia(), $this->getScheduler());
+            return true;
+        }
+
+        if ($label === "lavawave") {
+            InvokeAttackGiaPMMPService::execute($sender, new LavaWaveGia(), $this->getScheduler());
             return true;
         }
 

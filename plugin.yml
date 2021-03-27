@@ -4,6 +4,12 @@ version: 1.0.0
 api: [3.0.0]
 
 commands:
+  fireball:
+    usage: "/fireball"
+    permission: op
+  lavawave:
+    usage: "/lavawave"
+    permission: op
   iceball:
     usage: "/iceball"
     permission: op

@@ -7,10 +7,12 @@ namespace gia\pmmp\services;
 use gia\models\attack_gia\FireBallGia;
 use gia\models\attack_gia\IceBallGia;
 use gia\models\attack_gia\IceStalactiteGia;
+use gia\models\attack_gia\LavaWaveGia;
 use gia\models\AttackGia;
 use gia\pmmp\gia_pmmp\FireBallGiaPMMP;
 use gia\pmmp\gia_pmmp\IceBallGiaPMMP;
 use gia\pmmp\gia_pmmp\IceStalactiteGiaPMMP;
+use gia\pmmp\gia_pmmp\LavaWaveGiaPMMP;
 use gia\pmmp\utilities\FindGiaTarget;
 use gia\services\InvokeGiaService;
 use pocketmine\Player;
@@ -30,6 +32,9 @@ class InvokeAttackGiaPMMPService
         switch ($gia::NAME) {
             case FireBallGia::NAME:
                 FireBallGiaPMMP::invoke($invoker, $target, $scheduler);
+                return;
+            case LavaWaveGia::NAME:
+                LavaWaveGiaPMMP::invoke($invoker, $target, $scheduler);
                 return;
             case IceBallGia::NAME:
                 IceBallGiaPMMP::invoke($invoker, $target, $scheduler);

@@ -13,5 +13,6 @@ class FIreBallEntity extends GiaGrainEntity
 
     function onActive(): void {
         FireBallGiaPMMP::onHit($this->invoker, $this->target);
+        $this->kill();
     }
 }

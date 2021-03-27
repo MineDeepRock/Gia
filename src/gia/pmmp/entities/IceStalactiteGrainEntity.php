@@ -12,5 +12,6 @@ class IceStalactiteGrainEntity extends GiaGrainEntity
 
     function onActive(): void {
         IceStalactiteGiaPMMP::onHit($this->invoker, $this->target, $this->scheduler);
+        $this->kill();
     }
 }

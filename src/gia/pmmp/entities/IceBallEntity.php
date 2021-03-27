@@ -12,5 +12,6 @@ class IceBallEntity extends GiaGrainEntity
 
     function onActive(): void {
         IceBallGiaPMMP::onHit($this->invoker, $this->target);
+        $this->kill();
     }
 }

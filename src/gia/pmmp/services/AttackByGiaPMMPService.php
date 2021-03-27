@@ -29,9 +29,6 @@ class AttackByGiaPMMPService
             $damage = CalculateDamage::execute($invoker->getName(), "", $gia::Damage);
         }
 
-        var_dump($hitRate);
-        var_dump($damage);
-
         if (random_int(1, 100) >= $hitRate * 100) {
             if ($target instanceof Player) {
                 $target->sendPopup("回避");
