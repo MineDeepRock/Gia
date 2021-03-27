@@ -4,11 +4,13 @@
 namespace gia\pmmp\entities;
 
 
-use gia\pmmp\gia_executors\IceBallExecutor;
+use gia\pmmp\gia_pmmp\IceBallGiaPMMP;
 
 class IceBallEntity extends GiaGrainEntity
 {
+    const NAME = "IceBall";
+
     function onActive(): void {
-        IceBallExecutor::execute($this->invoker, $this->target);
+        IceBallGiaPMMP::onHit($this->invoker, $this->target);
     }
 }

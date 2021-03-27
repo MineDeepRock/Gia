@@ -69,7 +69,7 @@ class Main extends PluginBase implements Listener
             InvokeAttackGiaPMMPService::execute($sender, new FireBallGia(), $this->getScheduler());
             return true;
         }
-        
+
         return false;
     }
 }

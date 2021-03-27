@@ -33,7 +33,7 @@ class Gia
     }
 
     /**
-     * @return array
+     * @return GiaEffect[]
      */
     public function getGiaEffects(): array {
         return $this->giaEffects;

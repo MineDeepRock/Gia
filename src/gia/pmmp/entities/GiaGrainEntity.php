@@ -4,9 +4,6 @@
 namespace gia\pmmp\entities;
 
 
-use gia\models\attack_gia\IceBallGia;
-use gia\pmmp\directions\ActivatedIceBallDirection;
-use gia\pmmp\services\ActivateAttackGiaPMMPService;
 use pocketmine\entity\Entity;
 use pocketmine\level\Level;
 use pocketmine\nbt\tag\CompoundTag;
@@ -15,16 +12,14 @@ use pocketmine\scheduler\TaskScheduler;
 
 abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
 {
-    const NAME = "IceBall";
-
-    public string $skinName = self::NAME;
-    public string $geometryId = "geometry." . self::NAME;
-    public string $geometryName = self::NAME . ".geo.json";
+    const NAME = "";
 
     public $width = 0;
     public $height = 0;
     public $eyeHeight = 1.0;
     protected $gravity = 0;
+
+    private float $speed = 1.5;
 
 
     protected TaskScheduler $scheduler;
@@ -35,6 +30,11 @@ abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
         $this->scheduler = $scheduler;
         $this->invoker = $invoker;
         $this->target = $target;
+
+        $this->skinName = static::NAME;
+        $this->geometryId = "geometry." . static::NAME;
+        $this->geometryName = static::NAME . ".geo.json";
+
         parent::__construct($level, $nbt);
     }
 
@@ -43,6 +43,7 @@ abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
             $this->kill();
             return parent::entityBaseTick($tickDiff);
         }
+        if ($this->isImmobile()) return parent::entityBaseTick($tickDiff);
 
         if ($this->target instanceof Player) {
             if (!$this->target->isOnline()) {
@@ -55,12 +56,10 @@ abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
         $direction = $this->getDirectionVector();
 
         $distance = $this->target->asVector3()->add(0, 1)->distance($this);
-        //TODO : 近づくと加速するように
-        $speed = $distance >= 20 ? 1.5 : 2;
 
-        $this->motion->x = $direction->getX() * $speed;
-        $this->motion->y = $direction->getY() * $speed;
-        $this->motion->z = $direction->getZ() * $speed;
+        $this->motion->x = $direction->getX() * $this->speed;
+        $this->motion->y = $direction->getY() * $this->speed;
+        $this->motion->z = $direction->getZ() * $this->speed;
 
         if ($distance <= 1) {
             $this->onActive();
@@ -71,4 +70,11 @@ abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
     }
 
     abstract function onActive():void;
+
+    /**
+     * @param float $speed
+     */
+    public function setSpeed(float $speed): void {
+        $this->speed = $speed;
+    }
 }

@@ -24,11 +24,7 @@ class GiaEffectTargetType
         return new self("Allies");
     }
 
-    public static function OneEnemy(): self {
-        return new self("OneEnemy");
-    }
-
-    public static function Enemies(): self {
-        return new self("Enemies");
+    public static function Enemy(): self {
+        return new self("Enemy");
     }
 }

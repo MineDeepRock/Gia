@@ -4,11 +4,14 @@
 namespace gia\pmmp\entities;
 
 
-use gia\pmmp\gia_executors\FireBallExecutor;
+
+use gia\pmmp\gia_pmmp\FireBallGiaPMMP;
 
 class FIreBallEntity extends GiaGrainEntity
 {
+    const NAME = "FireBall";
+
     function onActive(): void {
-        FireBallExecutor::execute($this->invoker, $this->target);
+        FireBallGiaPMMP::onHit($this->invoker, $this->target);
     }
 }

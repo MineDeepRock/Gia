@@ -18,7 +18,7 @@ class IceStalactiteGia extends AttackGia
 
     public function __construct() {
         $giaEffects = [
-            new MovingVelocityDown(1, 3, GiaEffectTargetType::Enemies()),
+            new MovingVelocityDown(1, 3, GiaEffectTargetType::Enemy()),
         ];
         parent::__construct(4, GiaTargetType::AroundEnemy(), $giaEffects);
     }

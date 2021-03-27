@@ -17,7 +17,7 @@ class IceBallGia extends AttackGia
 
     public function __construct() {
         $giaEffects = [
-            new MovingVelocityDown(2, 5, GiaEffectTargetType::OneEnemy()),
+            new MovingVelocityDown(2, 5, GiaEffectTargetType::Enemy()),
         ];
         parent::__construct(2, GiaTargetType::SingleEnemy(), $giaEffects);
     }

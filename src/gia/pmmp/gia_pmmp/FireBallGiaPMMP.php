@@ -1,10 +1,12 @@
 <?php
 
+namespace gia\pmmp\gia_pmmp;
 
-namespace gia\pmmp\gia_invokers;
 
-
-use gia\pmmp\entities\IceStalactiteGrainEntity;
+use gia\models\attack_gia\FireBallGia;
+use gia\pmmp\directions\ActivatedFireBallDirection;
+use gia\pmmp\entities\FIreBallEntity;
+use gia\pmmp\services\AttackByGiaPMMPService;
 use pocketmine\entity\Entity;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\DoubleTag;
@@ -13,7 +15,7 @@ use pocketmine\nbt\tag\ListTag;
 use pocketmine\Player;
 use pocketmine\scheduler\TaskScheduler;
 
-class IceStalactiteGiaInvoker
+class FireBallGiaPMMP extends GiaPMMP
 {
     static function invoke(Player $invoker, Entity $target, TaskScheduler $scheduler): void {
         $nbt = new CompoundTag('', [
@@ -34,7 +36,14 @@ class IceStalactiteGiaInvoker
         ]);
 
 
-        $entity = new IceStalactiteGrainEntity($invoker->getLevel(), $nbt, $invoker, $target, $scheduler);
+        $entity = new FIreBallEntity($invoker->getLevel(), $nbt, $invoker, $target, $scheduler);
         $entity->spawnToAll();
+    }
+
+    static function onHit(Player $invoker, Entity $target) {
+        if (!$invoker->isOnline()) return;
+        $gia = new FireBallGia();
+        ActivatedFireBallDirection::summon($invoker->getLevel(), $target->getPosition());
+        AttackByGiaPMMPService::execute($gia, $invoker, $target);
     }
 }
