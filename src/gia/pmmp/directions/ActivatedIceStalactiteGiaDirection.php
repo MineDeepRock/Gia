@@ -11,7 +11,7 @@ use pocketmine\level\Level;
 use pocketmine\level\particle\DestroyBlockParticle;
 use pocketmine\Player;
 
-class LockOnIceStalactiteGiaDirection
+class ActivatedIceStalactiteGiaDirection
 {
     /**
      * @param Level $level

@@ -39,6 +39,18 @@ abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
     }
 
     public function entityBaseTick(int $tickDiff = 1): bool {
+        if (!$this->target->isAlive()) {
+            $this->kill();
+            return parent::entityBaseTick($tickDiff);
+        }
+
+        if ($this->target instanceof Player) {
+            if (!$this->target->isOnline()) {
+                $this->kill();
+                return parent::entityBaseTick($tickDiff);
+            }
+        }
+
         $this->lookAt($this->target->asVector3()->add(0, 1));
         $direction = $this->getDirectionVector();
 
