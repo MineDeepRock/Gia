@@ -12,7 +12,7 @@ use gia\models\GiaTargetType;
 class IceBallGia extends AttackGia
 {
     const NAME = "IceBall";
-    const Damage = 10;
+    const Damage = 4;
     const HitRate = 1.0;
 
     public function __construct() {

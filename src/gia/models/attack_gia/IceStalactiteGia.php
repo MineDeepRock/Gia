@@ -12,7 +12,7 @@ use gia\models\GiaTargetType;
 class IceStalactiteGia extends AttackGia
 {
     const NAME = "IceStalactite";
-    const Damage = 5;
+    const Damage = 4;
     const Range = 8;
     const HitRate = 0.9;
 
