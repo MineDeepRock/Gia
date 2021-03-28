@@ -26,6 +26,13 @@ class EntityFinder
         return $result;
     }
 
+    /**
+     * @param TeamId $teamId
+     * @param Level $level
+     * @param Vector3 $vector3
+     * @param float $distance
+     * @return Player[]
+     */
     static function getAroundEnemies(TeamId $teamId, Level $level, Vector3 $vector3, float $distance): array {
         $result = [];
         foreach (self::getAroundPlayers($level, $vector3, $distance) as $player) {
@@ -103,6 +110,12 @@ class EntityFinder
         return $result;
     }
 
+    /**
+     * @param Level $level
+     * @param Vector3 $vector3
+     * @param float $range
+     * @return Entity[]
+     */
     static function getAroundEntities(Level $level, Vector3 $vector3, float $range): array {
         $entities = [];
 

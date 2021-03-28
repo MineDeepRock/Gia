@@ -5,8 +5,10 @@ namespace gia\pmmp\gia_pmmp;
 
 
 use gia\models\attack_gia\LavaWaveGia;
+use gia\pmmp\directions\ActivatedLavaWaveDirection;
 use gia\pmmp\directions\ReadyLavaWaveGiaDirection;
 use gia\pmmp\entities\LavaWaveGrainEntity;
+use gia\pmmp\services\AttackByGiaPMMPService;
 use gia\pmmp\utilities\EntityFinder;
 use gia\store\PlayerStatusStore;
 use pocketmine\entity\Entity;
@@ -55,6 +57,14 @@ class LavaWaveGiaPMMP
             $targets = EntityFinder::getAroundEnemies($invokerStatus->getTeamId(), $level, $center, LavaWaveGia::Range);
         }
 
-        LavaWaveGiaChildPMMP::invoke($invoker, $targets, $scheduler);
+        foreach ($targets as $target) {
+            if ($target->getId() === $mainTarget->getId()) {
+                $gia = new LavaWaveGia();
+                ActivatedLavaWaveDirection::summon($invoker->getLevel(), $mainTarget->getPosition());
+                AttackByGiaPMMPService::execute($gia, $invoker, $mainTarget);
+            } else {
+                LavaWaveGiaChildPMMP::invoke($invoker, $target, $mainTarget->getPosition(), $scheduler);
+            }
+        }
     }
 }

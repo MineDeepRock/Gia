@@ -20,22 +20,16 @@ use pocketmine\scheduler\TaskScheduler;
 
 class LavaWaveGiaChildPMMP
 {
-    static function invoke(Player $invoker, array $targets, TaskScheduler $scheduler): void {
-        if (count($targets) === 0) return;
-
-        usort($targets, fn($a, $b) => self::sortTargetsListByCloser($invoker->getPosition(), $a, $b));
-        $first = $targets[0];
-
-
+    static function invoke(Player $invoker, Entity $target, Vector3 $parentPosition, TaskScheduler $scheduler): void {
         $nbt = new CompoundTag('', [
             'Pos' => new ListTag('Pos', [
-                new DoubleTag('', $first->getX() + random_int(-3, 3)),
-                new DoubleTag('', $first->getY() + 1),
-                new DoubleTag('', $first->getZ() + random_int(-3, 3))
+                new DoubleTag('', $parentPosition->getX()),
+                new DoubleTag('', $parentPosition->getY()),
+                new DoubleTag('', $parentPosition->getZ())
             ]),
             'Motion' => new ListTag('Motion', [
                 new DoubleTag('', 0),
-                new DoubleTag('', 0),
+                new DoubleTag('', 0.5),
                 new DoubleTag('', 0)
             ]),
             'Rotation' => new ListTag('Rotation', [
@@ -44,7 +38,7 @@ class LavaWaveGiaChildPMMP
             ]),
         ]);
 
-        $entity = new LavaWaveChildEntity($invoker->getLevel(), $nbt, $invoker, $targets, $scheduler);
+        $entity = new LavaWaveChildEntity($invoker->getLevel(), $nbt, $invoker, $target, $scheduler);
         $entity->spawnToAll();
     }
 
@@ -53,9 +47,5 @@ class LavaWaveGiaChildPMMP
         $gia = new LavaWaveGia();
         ActivatedLavaWaveDirection::summon($invoker->getLevel(), $target->getPosition());
         AttackByGiaPMMPService::execute($gia, $invoker, $target);
-    }
-
-    static function sortTargetsListByCloser(Vector3 $pole, Entity $a, Entity $b) {
-        return $a->distance($pole) > $b->distance($pole) ? 1 : -1;
     }
 }

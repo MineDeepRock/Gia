@@ -76,4 +76,9 @@ abstract class GiaGrainEntity extends EntityBase implements InvincibleEntity
     public function setSpeed(float $speed): void {
         $this->speed = $speed;
     }
+
+    public function kill() : void{
+        $this->setHealth(0);
+        $this->scheduleUpdate();
+    }
 }
